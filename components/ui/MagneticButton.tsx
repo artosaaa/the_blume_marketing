@@ -55,6 +55,8 @@ export default function MagneticButton({
         className
       )}
     >
+      {/* Continuous looping sheen glint */}
+      <span aria-hidden className="btn-sheen" />
       <motion.span
         animate={{ x: pos.x * 0.3, y: pos.y * 0.3 }}
         transition={{ type: "spring", stiffness: 220, damping: 18, mass: 0.4 }}
