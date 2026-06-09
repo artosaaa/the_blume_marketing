@@ -95,7 +95,7 @@ export const WORK = [
     accent: "#F4C2D7",
   },
   {
-    slug: "café-lune",
+    slug: "cafe-lune",
     client: "Café Lune",
     category: "Café",
     year: "2025",
