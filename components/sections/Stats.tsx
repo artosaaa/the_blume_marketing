@@ -6,14 +6,17 @@ import { STATS } from "@/lib/site";
 
 function Counter({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-20%" });
+  const inView = useInView(ref, { once: true, margin: "-15%" });
   const [display, setDisplay] = useState(value);
 
-  // Animate the leading numeric portion if present (e.g. "180+", "$42M").
-  const match = value.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);
-
   useEffect(() => {
-    if (!inView || !match) return;
+    // Parse inside the effect so the dependency list stays stable
+    // (a fresh regex array each render would restart the count forever).
+    const match = value.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);
+    if (!inView || !match) {
+      setDisplay(value);
+      return;
+    }
     const [, prefix, num, suffix] = match;
     const target = parseFloat(num);
     const decimals = num.includes(".") ? 1 : 0;
@@ -26,11 +29,15 @@ function Counter({ value }: { value: string }) {
       const eased = 1 - Math.pow(1 - t, 3);
       const current = (target * eased).toFixed(decimals);
       setDisplay(`${prefix}${current}${suffix}`);
-      if (t < 1) raf = requestAnimationFrame(step);
+      if (t < 1) {
+        raf = requestAnimationFrame(step);
+      } else {
+        setDisplay(value); // snap to the exact original string
+      }
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [inView, match]);
+  }, [inView, value]);
 
   return <span ref={ref}>{display}</span>;
 }
