@@ -1,18 +1,29 @@
 /** @type {import('next').NextConfig} */
 
-// When building for GitHub Pages (a project site served from /<repo>),
-// set NEXT_PUBLIC_BASE_PATH=/the_blume_marketing in the CI environment.
+// Two deploy targets are supported:
+//
+//  • Vercel (default)  — a normal, fully-optimized Next.js build. Image
+//    optimization is on, no base path. Nothing to configure.
+//
+//  • GitHub Pages      — a static export served from a repo subpath. The
+//    Pages workflow sets NEXT_PUBLIC_BASE_PATH (e.g. /the_blume_marketing),
+//    which switches this config into static-export mode.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const isStaticExport = basePath.length > 0;
 
 const nextConfig = {
-  output: "export",
-  basePath: basePath || undefined,
-  assetPrefix: basePath || undefined,
-  trailingSlash: true,
   reactStrictMode: true,
+  ...(isStaticExport
+    ? {
+        output: "export",
+        basePath,
+        assetPrefix: basePath,
+        trailingSlash: true,
+      }
+    : {}),
   images: {
-    // Static export can't use the Next image optimizer.
-    unoptimized: true,
+    // The Next image optimizer can't run in a static export.
+    unoptimized: isStaticExport,
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
     ],
