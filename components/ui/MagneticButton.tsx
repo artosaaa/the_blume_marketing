@@ -50,7 +50,7 @@ export default function MagneticButton({
       animate={{ x: pos.x, y: pos.y }}
       transition={{ type: "spring", stiffness: 220, damping: 18, mass: 0.4 }}
       className={cn(
-        "group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full px-8 py-4 text-[13px] font-medium uppercase tracking-[0.18em] transition-colors duration-300",
+        "btn-glow group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full px-8 py-4 text-[13px] font-medium uppercase tracking-[0.18em] transition-colors duration-300",
         styles,
         className
       )}
