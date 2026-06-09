@@ -3,6 +3,7 @@ import { Fraunces, Inter, Archivo_Black } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import CustomCursor from "@/components/ui/CustomCursor";
+import Aurora from "@/components/ui/Aurora";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import { SITE } from "@/lib/site";
@@ -61,6 +62,7 @@ export default function RootLayout({
     <html lang="en" className={`${fraunces.variable} ${inter.variable} ${archivo.variable}`}>
       <body className="bg-ink text-bone antialiased">
         <SmoothScroll>
+          <Aurora />
           <CustomCursor />
           <div className="grain-overlay" aria-hidden />
           <Nav />
