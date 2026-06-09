@@ -109,22 +109,32 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  width: 40%;
+  width: 45%;
   z-index: 0;
   pointer-events: none;
   background: linear-gradient(
     100deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.5) 50%,
     transparent 100%
   );
   transform: translateX(-180%) skewX(-18deg);
-  animation: btn-sheen 4.2s ease-in-out infinite;
+  animation: btn-sheen 3s ease-in-out infinite;
 }
 
 @keyframes btn-sheen {
   0% { transform: translateX(-180%) skewX(-18deg); }
-  55%, 100% { transform: translateX(320%) skewX(-18deg); }
+  60%, 100% { transform: translateX(300%) skewX(-18deg); }
+}
+
+/* Always-on breathing glow so CTAs read as continuously animated */
+.btn-glow {
+  animation: btn-glow 2.4s ease-in-out infinite;
+}
+
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244, 194, 215, 0); }
+  50% { box-shadow: 0 0 26px 2px rgba(244, 194, 215, 0.6); }
 }
 
 /* Ambient aurora — slow, infinite, GPU-cheap (transform/opacity only) */
