@@ -103,6 +103,30 @@ body {
   }
 }
 
+/* Looping sheen glint that sweeps across CTA buttons */
+.btn-sheen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  transform: translateX(-180%) skewX(-18deg);
+  animation: btn-sheen 4.2s ease-in-out infinite;
+}
+
+@keyframes btn-sheen {
+  0% { transform: translateX(-180%) skewX(-18deg); }
+  55%, 100% { transform: translateX(320%) skewX(-18deg); }
+}
+
 /* Ambient aurora — slow, infinite, GPU-cheap (transform/opacity only) */
 .aurora {
   position: fixed;
@@ -126,8 +150,8 @@ body {
   width: 55vw;
   height: 55vw;
   background: radial-gradient(circle at 30% 30%, #f4c2d7 0%, rgba(244, 194, 215, 0) 68%);
-  opacity: 0.22;
-  animation: aurora-a 26s ease-in-out infinite;
+  opacity: 0.3;
+  animation: aurora-a 24s ease-in-out infinite;
 }
 
 .aurora__blob--b {
@@ -136,8 +160,8 @@ body {
   width: 60vw;
   height: 60vw;
   background: radial-gradient(circle at 60% 40%, #e9d5e8 0%, rgba(233, 213, 232, 0) 70%);
-  opacity: 0.18;
-  animation: aurora-b 32s ease-in-out infinite;
+  opacity: 0.26;
+  animation: aurora-b 30s ease-in-out infinite;
 }
 
 .aurora__blob--c {
@@ -146,8 +170,18 @@ body {
   width: 45vw;
   height: 45vw;
   background: radial-gradient(circle at 50% 50%, #f4c2d7 0%, rgba(244, 194, 215, 0) 65%);
-  opacity: 0.12;
-  animation: aurora-c 22s ease-in-out infinite;
+  opacity: 0.18;
+  animation: aurora-c 20s ease-in-out infinite;
+}
+
+.aurora__blob--d {
+  top: 50%;
+  right: 20%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle at 50% 50%, #e9d5e8 0%, rgba(233, 213, 232, 0) 60%);
+  opacity: 0.16;
+  animation: aurora-d 27s ease-in-out infinite;
 }
 
 @keyframes aurora-a {
@@ -163,8 +197,14 @@ body {
 }
 
 @keyframes aurora-c {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); opacity: 0.1; }
-  50% { transform: translate3d(-10vw, 10vh, 0) scale(1.25); opacity: 0.16; }
+  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); opacity: 0.14; }
+  50% { transform: translate3d(-12vw, 12vh, 0) scale(1.3); opacity: 0.22; }
+}
+
+@keyframes aurora-d {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  35% { transform: translate3d(10vw, -12vh, 0) scale(1.22); }
+  70% { transform: translate3d(-8vw, -4vh, 0) scale(0.9); }
 }
 
 /* Film-grain noise overlay */
